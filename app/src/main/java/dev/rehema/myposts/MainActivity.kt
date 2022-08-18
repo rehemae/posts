@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dev.rehema.myposts.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
-import kotlin.math.log
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding:ActivityMainBinding
@@ -27,19 +26,29 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
                 if (response.isSuccessful){
                     var posts = response.body()
-                    Toast.makeText(baseContext, "fetched${posts!!.size} posts", Toast.
-                    LENGTH_LONG).show()
-                    var adapter=PostRvAdapter(baseContext,posts)
-                    binding.Rvposts.layoutManager = LinearLayoutManager(baseContext)
-                    binding.Rvposts.adapter=adapter
+                    if (posts != null)
+                        displayPosts(posts)
+//                    Toast.makeText(baseContext, "fetched${posts!!.size} posts", Toast.
+//                    LENGTH_LONG).show()
+//                    var adapter=PostRvAdapter(baseContext,posts)
+//                    binding.Rvposts.layoutManager = LinearLayoutManager(baseContext)
+//                    binding.Rvposts.adapter=adapter
 
                 }
             }
 
             override fun onFailure(call: Call<List<Post>>, t: Throwable) {
+                Toast.makeText(baseContext,t.message,Toast.LENGTH_LONG).show()
 
             }
 
         })
         }
+    fun displayPosts(postsList:List<Post>){
+        binding.Rvposts.layoutManager=LinearLayoutManager(this)
+        var PostsAdapter=PostRvAdapter(postsList)
+        binding.Rvposts.adapter=PostsAdapter
+    }
+
+
 }
