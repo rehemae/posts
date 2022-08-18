@@ -16,7 +16,8 @@ data class Comment(
     var id: Int,
     var name:String,
     var email:String,
-    var body: String
+    var body: String,
+    var tittle: String,
 )
 
 

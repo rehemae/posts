@@ -52,8 +52,8 @@ class Commentctivity : AppCompatActivity() {
     fun fetchComment() {
         var apiClient = ApiClient.buildApiClient(ApiInterface::class.java)
         var request = apiClient.getcommentId(postId)
-        request.enqueue(object : Callback<List<comment>> {
-            override fun onResponse(call: Call<List<comment>>, response: Response<List<comment>>) {
+        request.enqueue(object : Callback<List<Comment>> {
+            override fun onResponse(call: Call<List<Comment>>, response: Response<List<Comment>>) {
                 if (response.isSuccessful) {
                     var comments = response.body()
                     if (comments != null)
@@ -62,7 +62,7 @@ class Commentctivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<comment>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Comment>>, t: Throwable) {
                 Toast.makeText(baseContext,t.message, Toast.LENGTH_LONG).show()
 
 
@@ -71,7 +71,7 @@ class Commentctivity : AppCompatActivity() {
         })
     }
 
-    fun displaycomment(commentList: List<comment>) {
+    fun displaycomment(commentList: List<Comment>) {
         binding.rvcommentlist.layoutManager = LinearLayoutManager(this)
         var commentRvAdapter = CommentRvAdapter(commentList)
         binding.rvcommentlist.adapter = commentRvAdapter

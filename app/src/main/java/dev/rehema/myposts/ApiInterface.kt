@@ -13,7 +13,7 @@ interface ApiInterface {
     @GET("/posts/{id}/comments")
 
 
-    fun  getcommentId(@Path("id")commentId: Int):Call<List<comment>>
+    fun  getcommentId(@Path("id")commentId: Int):Call<List<Comment>>
 
 }
 

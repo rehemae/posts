@@ -7,24 +7,24 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.rehema.myposts.databinding.ActivityCommentctivityBinding
 
 
-class CommentRvAdapter(var currentList: List<comment>): RecyclerView.Adapter<commentViewHolder>() {
+class CommentRvAdapter(var currentList: List<Comment>): RecyclerView.Adapter<commentViewHolder>() {
     override fun onBindViewHolder(holder: commentViewHolder, position: Int) {
         var currentComment = currentList.get(position)
 
         holder.bindingView.tvposttittle.text = currentComment.tittle
         holder.bindingView.tvpostbody.text = currentComment.body
         val context = holder.itemView.context
-        holder.bindingView.cvComment.setOnClickListener {
-            val intent = Intent(holder.itemView.context, Commentctivity::class.java)
-            intent.putExtra("COMMENT_ID", currentComment.id)
-            context.startActivity(intent)
-
-        }
-
-//        with(holder.bindingView){
-//            tvbody.text=currentComment.body
-//            tvTitle.text=currentComment.tittle
+//        holder.bindingView.cvComment.setOnClickListener {
+//            val intent = Intent(holder.itemView.context, Commentctivity::class.java)
+//            intent.putExtra("COMMENT_ID", currentComment.id)
+//            context.startActivity(intent)
+//
 //        }
+
+        with(holder.bindingView){
+            tvposttittle.text=currentComment.body
+            tvpostbody.text=currentComment.tittle
+    }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): commentViewHolder {
